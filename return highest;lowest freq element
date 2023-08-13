@@ -1,0 +1,36 @@
+vector<int> getFrequencies(vector<int>& v) {
+// Using unordered_map filling values
+
+    unordered_map<int,int> map;
+    for(int i=0;i<v.size();i++){
+        map[v[i]]++;
+    }
+// Finding Max and min elements
+
+        int mx=INT_MIN;
+        int mn=INT_MAX;
+    for(auto it=map.begin();it!=map.end();it++){
+        mx=max(mx,it->second);
+        mn= min(mn,it->second);
+    }
+// Finding multiple elements if present
+
+    auto it= map.begin();
+    int ans1=INT_MAX;
+    int ans2= INT_MAX;
+    while(it!=map.end()){
+      if(it->second == mx) {
+        ans1 = min(it->first, ans1);
+      }
+      if(it->second==mn){
+          ans2= min(ans2,it->first);
+      }
+        it++;
+    }
+// Returning Answer
+
+    vector<int> ans;
+    ans.push_back(ans1);
+    ans.push_back(ans2);
+    return ans;
+}
